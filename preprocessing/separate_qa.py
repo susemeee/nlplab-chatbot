@@ -48,7 +48,10 @@ def get_qa_pairs(df, consume_all=True):
 def write_to_tsv(file_name, pairs, replace_line_break=True):
     with open(file_name, 'w') as out_file:
         for q, a in pairs:
-            out_file.write('{0}\t{1}\n'.format(q, a.replace('\n', LINE_BREAK) if replace_line_break else a))
+            if replace_line_break:
+                out_file.write('{0}\t{1}\n'.format(q.replace('\n', LINE_BREAK), a.replace('\n', LINE_BREAK)))
+            else:
+                out_file.write('{0}\t{1}\n'.format(q, a))
             out_file.flush()
 
 qa_pairs = get_qa_pairs(df)

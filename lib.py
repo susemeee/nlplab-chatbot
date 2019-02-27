@@ -17,6 +17,7 @@ def load_data(data_path, data_size=10000):
             input_text, target_text = line.split('\t')
             # We use START_SEQ as the "start sequence" character
             # for the targets, and END_SEQ as "end sequence" character.
+            input_text = input_text.replace(LINE_BREAK, '\n')
             target_text = START_SEQ + target_text.replace(LINE_BREAK, '\n') + END_SEQ
             input_texts.append(input_text)
             target_texts.append(target_text)
