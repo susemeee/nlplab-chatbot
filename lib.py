@@ -14,7 +14,12 @@ def load_data(data_path, data_size=10000):
     with open(data_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
         for i, line in enumerate(lines[:min(data_size, len(lines) - 2)]):
-            input_text, target_text = line.split('\t')
+            seps = line.split('\t')
+            if len(seps) != 2:
+                print('Invalid line: {0}'.format(line))
+                continue
+
+            input_text, target_text = seps
             # We use START_SEQ as the "start sequence" character
             # for the targets, and END_SEQ as "end sequence" character.
             input_text = input_text.replace(LINE_BREAK, '\n')
