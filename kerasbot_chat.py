@@ -1,3 +1,4 @@
+import os
 import traceback
 import numpy as np
 from lib import load_data
@@ -7,7 +8,7 @@ from keras.layers import Input
 from preprocessing.const import START_SEQ, END_SEQ
 
 latent_dim = 256
-data = load_data('chat_logs_dec_r.txt')
+data = load_data(os.environ.get('KB_DATA_PATH', 'chat_logs_dec_r.txt'), int(os.environ.get('KB_DATA_SIZE', 10000)))
 
 model = load_model('s2s.h5')
 

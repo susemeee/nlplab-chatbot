@@ -1,16 +1,15 @@
-from __future__ import print_function
-
 from keras.models import Model
 from keras.layers import Input, LSTM, Dense
+import os
 import numpy as np
 from lib import load_data
 
-batch_size = 64  # Batch size for training.
-epochs = 15  # Number of epochs to train for.
+batch_size = int(os.environ.get('KB_BATCH_SIZE', 64))  # Batch size for training.
+epochs = int(os.environ.get('KB_EPOCH', 15))  # Number of epochs to train for.
 latent_dim = 256  # Latent dimensionality of the encoding space.
 # Path to the data txt file on disk.
-data_path = 'data/chat_logs_pairs.tsv'
-data_size = 1000
+data_path = os.environ.get('KB_DATA_PATH', 'data/chat_logs_pairs.tsv')
+data_size = int(os.environ.get('KB_DATA_SIZE', 10000))
 
 data = load_data(data_path, data_size)
 
